@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Book, BookInstance, Student
+from .forms import BookForm
 
 # Create your views here.
 
@@ -39,3 +40,14 @@ class LoanedBookByUserListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return BookInstance.objects.filter(status__exact='o').order_by('returned')
         
+def add_books(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('books')
+        else:
+            return render(request, 'catalog/addbook.html', {"form":form}, status=400)
+    else:
+        form = BookForm()
+        return render(request, 'catalog/addbook.html', {"form":form}, status=200)

@@ -63,7 +63,7 @@ class BookInstance(models.Model):
 class Student(models.Model):
     first_name = models.CharField('First Name', max_length=200)
     last_name = models.CharField('Last Name', max_length=200)
-    mobile = models.IntegerField('Mobile', max_length=10)
+    mobile = models.CharField('Mobile', max_length=10)
     join_date = models.DateField()
     book_issued = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True, blank=True)
 

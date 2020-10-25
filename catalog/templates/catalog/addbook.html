@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<form method="post" novalidate>
+    <h1 >Add Book</h1><br>
+    {% csrf_token %}
+    {{form.as_p}}
+<button type="submit">Submit</button>
+</form>
+{% endblock %}
