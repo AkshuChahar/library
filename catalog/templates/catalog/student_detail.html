@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    <h2>Student: {{ student.first_name }} {{ student.last_name }}</h2>
+    <p>{{ student.mobile }}</p>
+    <p>{{ student.join_date }}</p>
+
+    <div style="margin-top:20px; margin-left:20px">
+        <h4>Books</h4>
+        <dl>
+            {% for book in student.book_set.all %}
+            <dt><a href="{% url 'book-detail' book.pk %}">{{book}}</a></dt>
+            <dd>{{book.summary}}</dd>
+            {% endfor %}
+        </dl>
+    </div>
+{% endblock %}
